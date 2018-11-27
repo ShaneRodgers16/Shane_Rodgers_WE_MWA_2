@@ -1,0 +1,61 @@
+<!--
+  * Author: Shane Rodgers
+  * Assignment: WE Mobile Web Applications, Digital Skills Academy
+  * Student ID: STU-00001621
+  * Date : 2018/11/28
+-->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="shortcut icon" href="icon.png" type="image/x-icon" />
+    <script src="js/angular.min.js"></script>
+    <script src="js/script.js"></script>
+    <title>To Do Application</title>
+  </head>
+  <body>
+    <div class="container" ng-app="todoApp" ng-controller="todoCtrl">
+      <form ng-submit="add()">
+        <input
+          type="text"
+          ng-model="titleOfToDo"
+          placeholder="Some title of task..."
+        />
+        <button type="submit">Add</button>
+      </form>
+      <ul>
+        <li ng-repeat="task in tasks track by $index">
+          <span
+            class="task-is-completed-{{task.status}}"
+            ng-show="!task.editing"
+            >{{ task.title }}</span
+          >
+          <div class="task-stuff">
+            <label for="completed" ng-show="!task.editing">Completed</label>
+            <input
+              type="checkbox"
+              id="completed"
+              ng-model="task.status"
+              ng-show="!task.editing"
+            />
+            <input type="text" ng-show="task.editing" ng-model="task.title" />
+            <button class="save" ng-click="save()" ng-show="task.editing">
+              Save
+            </button>
+            <button class="edit" ng-click="edit()" ng-show="!task.editing">
+              Edit
+            </button>
+            <button class="delete" ng-click="delete()" ng-show="!task.editing">
+              Delete
+            </button>
+          </div>
+        </li>
+        <span class="empty" ng-show="empty">Your to do list is empty.</span>
+      </ul>
+    </div>
+  </body>
+</html>
